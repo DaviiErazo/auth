@@ -1,4 +1,0 @@
-services:
-
-  App.User.UserCreator:
-    class: ../../../../modules/Users/application/Create/UserCreator

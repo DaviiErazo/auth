@@ -14,6 +14,7 @@ export class UserPutController implements Controller {
         const name: string = req.params.name;
         const password: string = req.params.password;
         const email: string = req.params.email;
+        
         const createUserCommand = new CreateUserCommand({ id, name, password, email });
 
         try {
@@ -22,7 +23,7 @@ export class UserPutController implements Controller {
             if (error instanceof UserAlreadyExists) {
                 res.status(httpStatus.BAD_REQUEST).send(error.message);
             } else {
-                res.status(httpStatus.INTERNAL_SERVER_ERROR).json(error);
+                res.status(httpStatus.INTERNAL_SERVER_ERROR).json(error.message);
             }
         }
         res.status(httpStatus.CREATED).send();

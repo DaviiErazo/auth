@@ -1,5 +1,0 @@
-services:
-
-  Apps.User.controllers.StatusGetController:
-    class: ../../controllers/StatusGetController
-    arguments: []

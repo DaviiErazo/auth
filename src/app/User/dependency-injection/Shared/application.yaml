@@ -1,0 +1,13 @@
+services:
+
+  Shared.Logger:
+    class: ../../../../modules/Shared/infrastructure/WinstonLogger
+    arguments: []
+  
+  Shared.CommandBus:
+    class: ../../../../modules/Shared/infrastructure/CommandBus/InMemoryCommandBus
+    arguments: ['@Shared.CommandHandlersInformation']
+  
+  Shared.CommandHandlersInformation:
+    class: ../../../../modules/Shared/infrastructure/CommandBus/CommandHandlersInformation
+    arguments: ['!tagged commandHandler']

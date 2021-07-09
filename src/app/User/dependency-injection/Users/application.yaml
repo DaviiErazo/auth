@@ -1,0 +1,10 @@
+services:
+
+  App.Users.UserCreator:
+    class: ../../../../modules/Users/application/Create/UserCreator
+
+  App.Users.CreateUserCommandHandler:
+    class: ../../../../modules/Users/application/Create/CreateUserCommandHandler
+    arguments: ['@App.Users.UserCreator']
+    tags: 
+      - { name: 'commandHandler' }

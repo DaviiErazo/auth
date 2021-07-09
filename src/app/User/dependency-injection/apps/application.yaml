@@ -1,0 +1,9 @@
+services:
+
+  App.controllers.StatusGetController:
+    class: ../../controllers/StatusGetController
+    arguments: []
+
+  App.controllers.StatusUserPutController:
+    class: ../../controllers/UserPutController
+    arguments: ["@Shared.CommandBus"]
