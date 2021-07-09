@@ -1,6 +1,6 @@
-import { Command } from '../../domain/Command';
-import { CommandHandler } from '../../domain/CommandHandler';
-import { CommandNotRegisteredError } from '../../domain/CommandNotRegisteredError';
+import { Command } from "../../domain/Command";
+import { CommandHandler } from "../../domain/CommandHandler";
+import { CommandNotRegisteredError } from "../../domain/CommandNotRegisteredError";
 
 export class CommandHandlersInformation {
   private commandHandlersMap: Map<Command, CommandHandler<Command>>;
@@ -12,7 +12,7 @@ export class CommandHandlersInformation {
   private formatHandlers(commandHandlers: Array<CommandHandler<Command>>): Map<Command, CommandHandler<Command>> {
     const handlersMap = new Map();
 
-    commandHandlers.forEach(commandHandler => {
+    commandHandlers.forEach((commandHandler) => {
       handlersMap.set(commandHandler.subscribedTo(), commandHandler);
     });
 
@@ -21,12 +21,6 @@ export class CommandHandlersInformation {
 
   public search(command: Command): CommandHandler<Command> {
     const commandHandler = this.commandHandlersMap.get(command.constructor);
-
-    console.log("*****************************************************")
-    console.log(this.commandHandlersMap)
-    console.log(command.constructor)
-    console.log("*****************************************************")
-
 
     if (!commandHandler) {
       throw new CommandNotRegisteredError(command);

@@ -9,23 +9,26 @@ import { UserPassword } from "../../domain/UserPassword";
 import { UserEmail } from "../../domain/UserEmail";
 
 export class CreateUserCommandHandler implements CommandHandler<CreateUserCommand> {
-    constructor(private userCreator: UserCreator) { }
+  constructor(private userCreator: UserCreator) {}
 
-    subscribedTo(): Command {
-        return CreateUserCommand;
-    }
+  subscribedTo(): Command {
+    console.log("***********************************************");
+    console.log(CreateUserCommand);
+    console.log("***********************************************");
+    return CreateUserCommand;
+  }
 
-    async handle(command: CreateUserCommand): Promise<void> {
-        const id = new UserId(command.id);
-        const name = new UserName(command.name);
-        const password = new UserPassword(command.password);
-        const email = new UserEmail(command.email);
+  async handle(command: CreateUserCommand): Promise<void> {
+    const id = new UserId(command.id);
+    const name = new UserName(command.name);
+    const password = new UserPassword(command.password);
+    const email = new UserEmail(command.email);
 
-        await this.userCreator.run({
-            id,
-            name,
-            password,
-            email
-        });
-    }
+    await this.userCreator.run({
+      id,
+      name,
+      password,
+      email,
+    });
+  }
 }

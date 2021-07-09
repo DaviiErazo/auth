@@ -1,10 +1,10 @@
-import winston, { Logger as WinstonLoggerType } from 'winston';
-import Logger from '../domain/Logger';
+import winston, { Logger as WinstonLoggerType } from "winston";
+import Logger from "../domain/Logger";
 
 enum Levels {
-  DEBUG = 'debug',
-  ERROR = 'error',
-  INFO = 'info'
+  DEBUG = "debug",
+  ERROR = "error",
+  INFO = "info",
 }
 
 class WinstonLogger implements Logger {
@@ -23,8 +23,8 @@ class WinstonLogger implements Logger {
         new winston.transports.Console(),
         new winston.transports.File({ filename: `logs/${Levels.DEBUG}.log`, level: Levels.DEBUG }),
         new winston.transports.File({ filename: `logs/${Levels.ERROR}.log`, level: Levels.ERROR }),
-        new winston.transports.File({ filename: `logs/${Levels.INFO}.log`, level: Levels.INFO })
-      ]
+        new winston.transports.File({ filename: `logs/${Levels.INFO}.log`, level: Levels.INFO }),
+      ],
     });
   }
 
