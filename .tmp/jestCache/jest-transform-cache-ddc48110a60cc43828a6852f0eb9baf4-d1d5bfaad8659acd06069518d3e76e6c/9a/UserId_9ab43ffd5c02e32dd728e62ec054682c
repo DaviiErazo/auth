@@ -1,9 +1,0 @@
-346e748f5c28f3cdc34c09df02265772
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserId = void 0;
-const Uuid_1 = require("../../../Shared/domain/value-object/Uuid");
-class UserId extends Uuid_1.Uuid {
-}
-exports.UserId = UserId;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2RhdmlkL0RvY3VtZW50cy9iYW5rLWF1dGgvc3JjL21vZHVsZXMvVXNlcnMvU2hhcmVkL2RvbWFpbi9Vc2VySWQudHMiLCJtYXBwaW5ncyI6Ijs7O0FBQUEsbUVBQWdFO0FBRWhFLE1BQWEsTUFBTyxTQUFRLFdBQUk7Q0FBRztBQUFuQyx3QkFBbUMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL2RhdmlkL0RvY3VtZW50cy9iYW5rLWF1dGgvc3JjL21vZHVsZXMvVXNlcnMvU2hhcmVkL2RvbWFpbi9Vc2VySWQudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgVXVpZCB9IGZyb20gJy4uLy4uLy4uL1NoYXJlZC9kb21haW4vdmFsdWUtb2JqZWN0L1V1aWQnO1xuXG5leHBvcnQgY2xhc3MgVXNlcklkIGV4dGVuZHMgVXVpZCB7fVxuIl0sInZlcnNpb24iOjN9

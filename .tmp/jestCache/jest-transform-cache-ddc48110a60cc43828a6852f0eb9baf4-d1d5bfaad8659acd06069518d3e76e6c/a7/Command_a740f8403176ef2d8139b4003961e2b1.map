@@ -1,1 +1,0 @@
-{"file":"/Users/david/Documents/bank-auth/src/modules/Shared/domain/Command.ts","mappings":";;;AAAA,MAAsB,OAAO;CAAG;AAAhC,0BAAgC","names":[],"sources":["/Users/david/Documents/bank-auth/src/modules/Shared/domain/Command.ts"],"sourcesContent":["export abstract class Command {}"],"version":3}
