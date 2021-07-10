@@ -13,8 +13,8 @@ class HandledCommand extends Command {
 }
 
 class MyCommandHandler implements CommandHandler<HandledCommand> {
-  subscribedTo(): HandledCommand {
-    return HandledCommand;
+  subscribedTo(): String {
+    return HandledCommand.name;
   }
 
   async handle(command: HandledCommand): Promise<void> {}

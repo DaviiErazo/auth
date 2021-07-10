@@ -20,7 +20,8 @@ export class CommandHandlersInformation {
   }
 
   public search(command: Command): CommandHandler<Command> {
-    const commandHandler = this.commandHandlersMap.get(command.constructor);
+    const commandHandler = this.commandHandlersMap.get(command.constructor.name);
+
     if (!commandHandler) {
       throw new CommandNotRegisteredError(command);
     }
