@@ -13,8 +13,6 @@ type Params = {
 };
 
 export class UserCreator {
-  constructor() {}
-
   async run(userProps: Params): Promise<void> {
     const user = User.create(userProps);
     console.log(user);

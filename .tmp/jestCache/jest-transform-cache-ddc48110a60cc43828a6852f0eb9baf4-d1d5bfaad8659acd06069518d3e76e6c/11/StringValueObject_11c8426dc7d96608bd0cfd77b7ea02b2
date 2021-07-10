@@ -1,0 +1,14 @@
+ec27857dec8edad30e1e6d6597d76a1c
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StringValueObject = void 0;
+class StringValueObject {
+    constructor(value) {
+        this.value = value;
+    }
+    toString() {
+        return this.value;
+    }
+}
+exports.StringValueObject = StringValueObject;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2RhdmlkL0RvY3VtZW50cy9iYW5rLWF1dGgvc3JjL21vZHVsZXMvU2hhcmVkL2RvbWFpbi92YWx1ZS1vYmplY3QvU3RyaW5nVmFsdWVPYmplY3QudHMiLCJtYXBwaW5ncyI6Ijs7O0FBQUEsTUFBc0IsaUJBQWlCO0lBR3JDLFlBQVksS0FBYTtRQUN2QixJQUFJLENBQUMsS0FBSyxHQUFHLEtBQUssQ0FBQztJQUNyQixDQUFDO0lBRUQsUUFBUTtRQUNOLE9BQU8sSUFBSSxDQUFDLEtBQUssQ0FBQztJQUNwQixDQUFDO0NBQ0Y7QUFWRCw4Q0FVQyIsIm5hbWVzIjpbXSwic291cmNlcyI6WyIvVXNlcnMvZGF2aWQvRG9jdW1lbnRzL2JhbmstYXV0aC9zcmMvbW9kdWxlcy9TaGFyZWQvZG9tYWluL3ZhbHVlLW9iamVjdC9TdHJpbmdWYWx1ZU9iamVjdC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgYWJzdHJhY3QgY2xhc3MgU3RyaW5nVmFsdWVPYmplY3Qge1xuICByZWFkb25seSB2YWx1ZTogc3RyaW5nO1xuXG4gIGNvbnN0cnVjdG9yKHZhbHVlOiBzdHJpbmcpIHtcbiAgICB0aGlzLnZhbHVlID0gdmFsdWU7XG4gIH1cblxuICB0b1N0cmluZygpOiBzdHJpbmcge1xuICAgIHJldHVybiB0aGlzLnZhbHVlO1xuICB9XG59XG4iXSwidmVyc2lvbiI6M30=

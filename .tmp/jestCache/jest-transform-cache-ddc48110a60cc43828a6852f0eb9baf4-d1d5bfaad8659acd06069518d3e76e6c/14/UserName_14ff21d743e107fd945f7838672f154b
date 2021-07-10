@@ -1,0 +1,19 @@
+340c6ee4e8268efa1994ff590e7b882c
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserName = void 0;
+const InvalidArgumentError_1 = require("../../Shared/domain/value-object/InvalidArgumentError");
+const StringValueObject_1 = require("../../Shared/domain/value-object/StringValueObject");
+class UserName extends StringValueObject_1.StringValueObject {
+    constructor(value) {
+        super(value);
+        this.ensureLengthIsLessThan30Characters(value);
+    }
+    ensureLengthIsLessThan30Characters(value) {
+        if (value.length > 30) {
+            throw new InvalidArgumentError_1.InvalidArgumentError(`The User Name <${value}> has more than 30 characters`);
+        }
+    }
+}
+exports.UserName = UserName;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2RhdmlkL0RvY3VtZW50cy9iYW5rLWF1dGgvc3JjL21vZHVsZXMvVXNlcnMvZG9tYWluL1VzZXJOYW1lLnRzIiwibWFwcGluZ3MiOiI7OztBQUFBLGdHQUE2RjtBQUM3RiwwRkFBdUY7QUFFdkYsTUFBYSxRQUFTLFNBQVEscUNBQWlCO0lBQzNDLFlBQVksS0FBYTtRQUNyQixLQUFLLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDYixJQUFJLENBQUMsa0NBQWtDLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDbkQsQ0FBQztJQUVPLGtDQUFrQyxDQUFDLEtBQWE7UUFDcEQsSUFBSSxLQUFLLENBQUMsTUFBTSxHQUFHLEVBQUUsRUFBRTtZQUNuQixNQUFNLElBQUksMkNBQW9CLENBQUMsa0JBQWtCLEtBQUssK0JBQStCLENBQUMsQ0FBQztTQUMxRjtJQUNMLENBQUM7Q0FDSjtBQVhELDRCQVdDIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy9kYXZpZC9Eb2N1bWVudHMvYmFuay1hdXRoL3NyYy9tb2R1bGVzL1VzZXJzL2RvbWFpbi9Vc2VyTmFtZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbnZhbGlkQXJndW1lbnRFcnJvciB9IGZyb20gXCIuLi8uLi9TaGFyZWQvZG9tYWluL3ZhbHVlLW9iamVjdC9JbnZhbGlkQXJndW1lbnRFcnJvclwiO1xuaW1wb3J0IHsgU3RyaW5nVmFsdWVPYmplY3QgfSBmcm9tIFwiLi4vLi4vU2hhcmVkL2RvbWFpbi92YWx1ZS1vYmplY3QvU3RyaW5nVmFsdWVPYmplY3RcIjtcblxuZXhwb3J0IGNsYXNzIFVzZXJOYW1lIGV4dGVuZHMgU3RyaW5nVmFsdWVPYmplY3Qge1xuICAgIGNvbnN0cnVjdG9yKHZhbHVlOiBzdHJpbmcpIHtcbiAgICAgICAgc3VwZXIodmFsdWUpO1xuICAgICAgICB0aGlzLmVuc3VyZUxlbmd0aElzTGVzc1RoYW4zMENoYXJhY3RlcnModmFsdWUpO1xuICAgIH1cblxuICAgIHByaXZhdGUgZW5zdXJlTGVuZ3RoSXNMZXNzVGhhbjMwQ2hhcmFjdGVycyh2YWx1ZTogc3RyaW5nKTogdm9pZCB7XG4gICAgICAgIGlmICh2YWx1ZS5sZW5ndGggPiAzMCkge1xuICAgICAgICAgICAgdGhyb3cgbmV3IEludmFsaWRBcmd1bWVudEVycm9yKGBUaGUgVXNlciBOYW1lIDwke3ZhbHVlfT4gaGFzIG1vcmUgdGhhbiAzMCBjaGFyYWN0ZXJzYCk7XG4gICAgICAgIH1cbiAgICB9XG59Il0sInZlcnNpb24iOjN9

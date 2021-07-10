@@ -12,9 +12,6 @@ export class CreateUserCommandHandler implements CommandHandler<CreateUserComman
   constructor(private userCreator: UserCreator) {}
 
   subscribedTo(): Command {
-    console.log("***********************************************");
-    console.log(CreateUserCommand);
-    console.log("***********************************************");
     return CreateUserCommand;
   }
 

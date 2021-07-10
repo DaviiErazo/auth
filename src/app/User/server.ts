@@ -5,7 +5,7 @@ import express, { Request, Response } from "express";
 import Router from "express-promise-router";
 import helmet from "helmet";
 import * as http from "http";
-import container from "./dependency-injection";
+import { winstonLogger } from "./dependency-injection";
 import httpStatus from "http-status";
 import Logger from "../../modules/Shared/domain/Logger";
 import { registerRoutes } from "./routes";
@@ -18,7 +18,7 @@ export class Server {
 
   constructor(port: string) {
     this.port = port;
-    this.logger = container.get("Shared.Logger");
+    this.logger = winstonLogger;
     this.express = express();
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
