@@ -8,8 +8,19 @@ services:
     class: ../../../../modules/Users/application/Create/UserCreator
     arguments: ['@User.UserRepository']
 
-  User.UserCourseCommandHandler:
+  User.LoginUser:
+    class: ../../../../modules/Users/application/Login/LoginUser
+    arguments: ['@User.UserRepository']
+
+  User.CreateUserCommandHandler:
     class: ../../../../modules/Users/application/Create/CreateUserCommandHandler
     arguments: ['@User.UserCreator']
     tags:
-      - { name: 'commandHandler' }
+      - { name: 'createCommandHandler' }
+
+
+  User.LoginUserCommandHandler:
+    class: ../../../../modules/Users/application/Login/LoginUserCommandHandler
+    arguments: ['@User.LoginUser']
+    tags:
+      - { name: 'loginCommandHandler' }

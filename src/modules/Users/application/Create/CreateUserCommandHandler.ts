@@ -14,9 +14,9 @@ export class CreateUserCommandHandler implements CommandHandler<CreateUserComman
   }
 
   async handle(command: CreateUserCommand): Promise<void> {
-    const name = new UserName(command.name);
-    const password = new UserPassword(command.password);
-    const email = new UserEmail(command.email);
+    const name = UserName.create(command.name);
+    const password = UserPassword.create(command.password, true);
+    const email = UserEmail.create(command.email);
 
     await this.userCreator.run({
       name,
