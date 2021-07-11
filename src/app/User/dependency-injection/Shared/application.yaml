@@ -1,0 +1,23 @@
+services:
+  Shared.MongoConfig:
+    factory:
+      class: ../../../../modules/Users/Shared/infrastructure/persistence/mongo/MongoConfigFactory
+      method: 'createConfig'
+
+  Shared.ConnectionManager:
+    factory:
+      class: ../../../../modules/Shared/infrastructure/persistence/mongo/MongoClientFactory
+      method: 'createClient'
+    arguments: ['users', '@Shared.MongoConfig']
+
+  Shared.Logger:
+    class: ../../../../modules/Shared/infrastructure/WinstonLogger
+    arguments: []
+
+  Shared.CommandHandlersInformation:
+    class: ../../../../modules/Shared/infrastructure/CommandBus/CommandHandlersInformation
+    arguments: ['!tagged commandHandler']
+
+  Shared.CommandBus:
+    class: ../../../../modules/Shared/infrastructure/CommandBus/InMemoryCommandBus
+    arguments: ['@Shared.CommandHandlersInformation']

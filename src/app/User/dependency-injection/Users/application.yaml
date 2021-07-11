@@ -1,0 +1,15 @@
+services:
+
+  User.UserRepository:
+    class: ../../../../modules/Users/infrastructure/persistence/MongoUserRepository
+    arguments: ['@Shared.ConnectionManager']
+
+  User.UserCreator:
+    class: ../../../../modules/Users/application/Create/UserCreator
+    arguments: ['@User.UserRepository']
+
+  User.UserCourseCommandHandler:
+    class: ../../../../modules/Users/application/Create/CreateUserCommandHandler
+    arguments: ['@User.UserCreator']
+    tags:
+      - { name: 'commandHandler' }
