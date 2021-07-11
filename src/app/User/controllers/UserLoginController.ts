@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 import { Controller } from "./Controller";
-import { UserNotFound } from "../../../modules/Users/domain/UserNotFound";
 import { CommandBus } from "../../../modules/Shared/domain/CommandBus";
 import { LoginUserCommand } from "../../../modules/Users/application/Login/LoginUserCommand";
+import { UserNotFound } from "../../../modules/Users/domain/UserNotFound";
 
 export class UserLoginController implements Controller {
   constructor(private commandBus: CommandBus) {}

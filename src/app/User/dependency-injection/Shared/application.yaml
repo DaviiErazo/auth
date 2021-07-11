@@ -16,7 +16,7 @@ services:
 
   Shared.CommandHandlersInformation:
     class: ../../../../modules/Shared/infrastructure/CommandBus/CommandHandlersInformation
-    arguments: ['!tagged loginCommandHandler']
+    arguments: ['!tagged commandHandler']
   
   Shared.CommandBus:
     class: ../../../../modules/Shared/infrastructure/CommandBus/InMemoryCommandBus

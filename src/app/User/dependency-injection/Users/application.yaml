@@ -16,11 +16,10 @@ services:
     class: ../../../../modules/Users/application/Create/CreateUserCommandHandler
     arguments: ['@User.UserCreator']
     tags:
-      - { name: 'createCommandHandler' }
-
+      - { name: 'commandHandler' }
 
   User.LoginUserCommandHandler:
     class: ../../../../modules/Users/application/Login/LoginUserCommandHandler
     arguments: ['@User.LoginUser']
     tags:
-      - { name: 'loginCommandHandler' }
+      - { name: 'commandHandler' }

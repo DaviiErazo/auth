@@ -5,9 +5,8 @@ import container from "../dependency-injection";
 
 export const register = (router: Router) => {
   const userPutController: UserPutController = container.get("User.controllers.UserPutController");
-  router.post("/user", (req: Request, res: Response) => userPutController.run(req, res));
+  router.post("/user/register", (req: Request, res: Response) => userPutController.run(req, res));
 
   const userLoginUserController: UserLoginController = container.get("User.controllers.UserLoginController");
   router.post("/user/login", (req: Request, res: Response) => userLoginUserController.run(req, res));
-
 };
