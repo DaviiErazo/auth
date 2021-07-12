@@ -6,7 +6,7 @@ services:
 
   User.UserCreator:
     class: ../../../../modules/Users/application/Create/UserCreator
-    arguments: ['@User.UserRepository']
+    arguments: ['@User.UserRepository', '@Shared.EventBus']
 
   User.LoginUser:
     class: ../../../../modules/Users/application/Login/LoginUser

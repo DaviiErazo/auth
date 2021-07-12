@@ -1,6 +1,6 @@
 import { Command } from "../../../Shared/domain/Command";
 
-type Params = {
+type CreateUserCommandProps = {
   name: string;
   password: string;
   email: string;
@@ -11,7 +11,7 @@ export class CreateUserCommand extends Command {
   password: string;
   email: string;
 
-  constructor({ name, password, email }: Params) {
+  constructor({ name, password, email }: CreateUserCommandProps) {
     super();
     this.name = name;
     this.password = password;

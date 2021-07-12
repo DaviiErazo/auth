@@ -17,7 +17,11 @@ services:
   Shared.CommandHandlersInformation:
     class: ../../../../modules/Shared/infrastructure/CommandBus/CommandHandlersInformation
     arguments: ['!tagged commandHandler']
-  
+
   Shared.CommandBus:
     class: ../../../../modules/Shared/infrastructure/CommandBus/InMemoryCommandBus
     arguments: ['@Shared.CommandHandlersInformation']
+
+  Shared.EventBus:
+    class: ../../../../modules/Shared/infrastructure/EventBus/InMemory/InMemorySyncEventBus
+    arguments: []

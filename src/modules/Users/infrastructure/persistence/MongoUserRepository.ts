@@ -4,10 +4,15 @@ import { UserAlreadyExists } from "../../domain/UserAlreadyExists";
 import { UserNotFound } from "../../domain/UserNotFound";
 import { UserRepository } from "../../domain/UserRepository";
 
-export class MongoUserRepository extends MongoRepository<User> implements UserRepository {
-  public save(user: User): Promise<void> {
+export class MongoUserRepository extends MongoRepository implements UserRepository {
+  public async save(user: User): Promise<void> {
     const userId: string = user.id.toString();
-    return this.persist(userId, user);
+
+    const collection = await this.collection();
+
+    const document = { ...user.toPrimitives(), _id: userId, id: undefined };
+
+    await collection.updateOne({ _id: userId }, { $set: document }, { upsert: true });
   }
 
   public async exists(email: string): Promise<void> {

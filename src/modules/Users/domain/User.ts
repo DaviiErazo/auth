@@ -4,6 +4,7 @@ import { UserPassword } from "./UserPassword";
 import { AggregateRoot } from "../../Shared/domain/AggregateRoot";
 import { UniqueEntityID } from "../../Shared/domain/UniqueEntityID";
 import { UserId } from "./userId";
+import { UserCreatedDomainEvent } from "./UserCreatedDomainEvent";
 
 type UserProps = {
   name: UserName;
@@ -12,8 +13,8 @@ type UserProps = {
 };
 
 export class User extends AggregateRoot<UserProps> {
-  get userId (): UserId {
-    return UserId.create(this._id)
+  get userId(): UserId {
+    return UserId.create(this._id);
   }
 
   get name(): UserName {
@@ -34,6 +35,17 @@ export class User extends AggregateRoot<UserProps> {
 
   static create(userProps: UserProps, id?: UniqueEntityID): User {
     const user = new User(userProps, id);
+    const isNewUser = !!id === false;
+
+    if (isNewUser) {
+      user.record(
+        new UserCreatedDomainEvent({
+          id: user.id.toString(),
+          name: user.name.props.value,
+          email: user.name.props.value,
+        })
+      );
+    }
     return user;
   }
 
