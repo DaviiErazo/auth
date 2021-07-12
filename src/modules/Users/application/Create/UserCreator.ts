@@ -19,7 +19,7 @@ export class UserCreator {
   }
 
   async run(userProps: Params): Promise<void> {
-    await this.repository.exists(userProps.email.value);
+    await this.repository.exists(userProps.email.props.value);
     const user = User.create(userProps);
     await this.repository.save(user);
   }

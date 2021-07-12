@@ -12,8 +12,8 @@ export class LoginUserCommandHandler implements CommandHandler<LoginUserCommand>
   }
 
   async handle(command: LoginUserCommand): Promise<void> {
-    const password = UserPassword.create(command.password, true);
-    const email = UserEmail.create(command.email);
+    const password = UserPassword.create({ value: command.password });
+    const email = UserEmail.create({ value: command.email });
 
     await this.loginUser.run({ password, email });
   }

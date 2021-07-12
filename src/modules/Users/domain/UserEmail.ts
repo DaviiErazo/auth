@@ -1,9 +1,13 @@
 import { InvalidArgumentError } from "../../Shared/domain/value-object/InvalidArgumentError";
-import { StringValueObject } from "../../Shared/domain/value-object/StringValueObject";
+import { ValueObject } from "../../Shared/domain/value-object/ValueObject";
 
-export class UserEmail extends StringValueObject {
-  private constructor(email: string) {
-    super(email);
+export interface UserEmailProps {
+  value: string;
+}
+
+export class UserEmail extends ValueObject<UserEmailProps> {
+  private constructor(props: UserEmailProps) {
+    super(props);
   }
 
   private static ensureEmailIsValid(email: string): void {
@@ -18,8 +22,8 @@ export class UserEmail extends StringValueObject {
     return !re.test(email);
   }
 
-  public static create(email: string) {
-    this.ensureEmailIsValid(email);
-    return new UserEmail(email);
+  public static create(props: UserEmailProps) {
+    this.ensureEmailIsValid(props.value);
+    return new UserEmail(props);
   }
 }

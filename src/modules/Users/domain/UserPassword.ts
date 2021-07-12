@@ -1,14 +1,17 @@
 import { InvalidArgumentError } from "../../Shared/domain/value-object/InvalidArgumentError";
-import { StringValueObject } from "../../Shared/domain/value-object/StringValueObject";
+import { ValueObject } from "../../Shared/domain/value-object/ValueObject";
 import * as bcrypt from "bcrypt-nodejs";
 
-export class UserPassword extends StringValueObject {
-  public static minLength: number = 6;
-  public hashed: boolean;
+export interface UserPasswordProps {
+  value: string;
+  hashed?: boolean;
+}
 
-  constructor(password: string, hashed: boolean) {
-    super(password);
-    this.hashed = hashed;
+export class UserPassword extends ValueObject<UserPasswordProps> {
+  public static minLength: number = 6;
+
+  private constructor(props: UserPasswordProps) {
+    super(props);
   }
 
   private static isAppropriateLength(password: string): void {
@@ -26,15 +29,16 @@ export class UserPassword extends StringValueObject {
   public async comparePassword(plainTextPassword: string): Promise<boolean> {
     let hashed: string;
     if (this.isAlreadyHashed()) {
-      hashed = this.value;
+      hashed = this.props.value;
       return this.bcryptCompare(plainTextPassword, hashed);
     } else {
-      return this.value === plainTextPassword;
+      return this.props.value === plainTextPassword;
     }
   }
 
   public isAlreadyHashed(): boolean {
-    return this.hashed;
+    if (!this.props.hashed || this.props.hashed === undefined) return false;
+    return this.props.hashed;
   }
 
   private bcryptCompare(plainText: string, hashed: string): Promise<boolean> {
@@ -58,16 +62,16 @@ export class UserPassword extends StringValueObject {
   public getHashedValue(): Promise<string> {
     return new Promise((resolve) => {
       if (this.isAlreadyHashed()) {
-        return resolve(this.value);
+        return resolve(this.props.value);
       } else {
-        return resolve(this.hashPassword(this.value));
+        return resolve(this.hashPassword(this.props.value));
       }
     });
   }
 
-  public static create(password: string, hashed: boolean): UserPassword {
-    this.isAppropriateLength(password);
-    this.againstNullOrUndefined(password);
-    return new UserPassword(password, hashed);
+  public static create(props: UserPasswordProps): UserPassword {
+    this.isAppropriateLength(props.value);
+    this.againstNullOrUndefined(props.value);
+    return new UserPassword(props);
   }
 }

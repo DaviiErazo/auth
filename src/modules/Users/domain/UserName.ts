@@ -1,9 +1,12 @@
 import { InvalidArgumentError } from "../../Shared/domain/value-object/InvalidArgumentError";
-import { StringValueObject } from "../../Shared/domain/value-object/StringValueObject";
+import { ValueObject } from "../../Shared/domain/value-object/ValueObject";
 
-export class UserName extends StringValueObject {
-  private constructor(value: string) {
-    super(value);
+interface UserNameProps {
+  value: string;
+}
+export class UserName extends ValueObject<UserNameProps> {
+  private constructor(props: UserNameProps) {
+    super(props);
   }
 
   private static ensureLengthIsLessThan30Characters(name: string): void {
@@ -12,8 +15,8 @@ export class UserName extends StringValueObject {
     }
   }
 
-  public static create(name: string) {
-    this.ensureLengthIsLessThan30Characters(name);
-    return new UserName(name);
+  public static create(props: UserNameProps) {
+    this.ensureLengthIsLessThan30Characters(props.value);
+    return new UserName(props);
   }
 }

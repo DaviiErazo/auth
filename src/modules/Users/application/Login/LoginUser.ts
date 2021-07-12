@@ -17,8 +17,8 @@ export class LoginUser {
 
   async run({ email, password }: Params): Promise<void> {
     let user: User;
-    user = await this.repository.getUserByEmail(email.value);
+    user = await this.repository.getUserByEmail(email.props.value);
 
-    console.log(await password.comparePassword(user.password.value))
+    console.log(await password.comparePassword(user.props.password.props.value))
   }
 }

@@ -6,7 +6,8 @@ import { UserRepository } from "../../domain/UserRepository";
 
 export class MongoUserRepository extends MongoRepository<User> implements UserRepository {
   public save(user: User): Promise<void> {
-    return this.persist("", user);
+    const userId: string = user.id.toString();
+    return this.persist(userId, user);
   }
 
   public async exists(email: string): Promise<void> {
