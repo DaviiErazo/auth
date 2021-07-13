@@ -11,6 +11,7 @@ export class DeleteUserCommandHandler implements CommandHandler<DeleteUserComman
 
   async handle(command: DeleteUserCommand): Promise<void> {
     const userId = command.id;
+    
     await this.userCreator.run(userId);
   }
 }
