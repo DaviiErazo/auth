@@ -1,10 +1,10 @@
 import container from "./dependency-injection";
 import { Definition } from 'node-dependency-injection';
-import { Server } from "./server";
-import { EventBus } from "../../modules/Shared/domain/EventBus";
-import { DomainEventSubscriber } from "../../modules/Shared/domain/DomainEventSubscriber";
-import { DomainEvent } from "../../modules/Shared/domain/DomainEvent";
-import { DomainEventMapping } from "../../modules/Shared/infrastructure/EventBus/DomainEventMapping";
+import { Server } from "./routes/server";
+import { EventBus } from "../modules/Shared/domain/EventBus";
+import { DomainEventSubscriber } from "../modules/Shared/domain/DomainEventSubscriber";
+import { DomainEvent } from "../modules/Shared/domain/DomainEvent";
+import { DomainEventMapping } from "../modules/Shared/infrastructure/EventBus/DomainEventMapping";
 
 export class UserApp {
   server?: Server;

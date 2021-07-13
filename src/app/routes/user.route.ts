@@ -1,8 +1,8 @@
 import { Router, Request, Response } from "express";
-import { UserLoginController } from "../controllers/UserLoginController";
-import { UserLogoutController } from "../controllers/UserLogoutController";
-import { UserPutController } from "../controllers/UserPutController";
-import { UserRefreshAccessTokenController } from "../controllers/UserRefreshAccessTokenController";
+import { UserLoginController } from "../User/controllers/UserLoginController";
+import { UserLogoutController } from "../User/controllers/UserLogoutController";
+import { UserPutController } from "../User/controllers/UserPutController";
+import { UserRefreshAccessTokenController } from "../User/controllers/UserRefreshAccessTokenController";
 import container from "../dependency-injection";
 
 export const register = (router: Router) => {

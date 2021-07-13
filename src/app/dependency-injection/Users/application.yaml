@@ -2,64 +2,64 @@ services:
 
   User.MongoConfig:
     factory:
-      class: ../../../../modules/Users/Shared/infrastructure/persistence/mongo/MongoConfigFactory
+      class: ../../../modules/Users/Shared/infrastructure/persistence/mongo/MongoConfigFactory
       method: 'createConfig'
 
   User.RedisConfig:
     factory:
-      class: ../../../../modules/Users/infrastructure/services/Redis/RedisConfig
+      class: ../../../modules/Users/infrastructure/services/Redis/RedisConfig
       method: 'createConfig'    
 
   User.UserRepository:
-    class: ../../../../modules/Users/infrastructure/persistence/MongoUserRepository
+    class: ../../../modules/Users/infrastructure/persistence/MongoUserRepository
     arguments: ['@Shared.ConnectionManager']
   
   User.RedisClient:
     factory:
-      class: ../../../../modules/Users/infrastructure/services/Redis/RedisConnection
+      class: ../../../modules/Users/infrastructure/services/Redis/RedisConnection
       method: 'createClient'
     arguments: ['@User.RedisConfig']
 
   User.RedisAuthService:
-    class: ../../../../modules/Users/infrastructure/services/Redis/RedisAuthService
+    class: ../../../modules/Users/infrastructure/services/Redis/RedisAuthService
     arguments: ['@User.RedisClient', '@User.RedisConfig']
 
   User.UserCreator:
-    class: ../../../../modules/Users/application/Create/UserCreator
+    class: ../../../modules/Users/application/Create/UserCreator
     arguments: ['@User.UserRepository', '@Shared.EventBus']
 
   User.LoginUser:
-    class: ../../../../modules/Users/application/Login/LoginUser
+    class: ../../../modules/Users/application/Login/LoginUser
     arguments: ['@User.UserRepository', '@User.RedisAuthService']
 
   User.LogoutUser:
-    class: ../../../../modules/Users/application/Logout/LogoutUser
+    class: ../../../modules/Users/application/Logout/LogoutUser
     arguments: ['@User.UserRepository', '@User.RedisAuthService']
 
   User.RefreshAccessToken:
-    class: ../../../../modules/Users/application/RefreshAccessToken/RefreshAccessToken
+    class: ../../../modules/Users/application/RefreshAccessToken/RefreshAccessToken
     arguments: ['@User.UserRepository', '@User.RedisAuthService']
 
   User.CreateUserCommandHandler:
-    class: ../../../../modules/Users/application/Create/CreateUserCommandHandler
+    class: ../../../modules/Users/application/Create/CreateUserCommandHandler
     arguments: ['@User.UserCreator']
     tags:
       - { name: 'commandHandler' }
 
   User.LoginUserCommandHandler:
-    class: ../../../../modules/Users/application/Login/LoginUserCommandHandler
+    class: ../../../modules/Users/application/Login/LoginUserCommandHandler
     arguments: ['@User.LoginUser']
     tags:
       - { name: 'commandHandler' }
 
   User.LogoutUserCommandHandler:
-    class: ../../../../modules/Users/application/Logout/LogoutUserCommandHandler
+    class: ../../../modules/Users/application/Logout/LogoutUserCommandHandler
     arguments: ['@User.LogoutUser']
     tags:
       - { name: 'commandHandler' }
 
   User.RefreshAccessTokenCommandHandler:
-    class: ../../../../modules/Users/application/RefreshAccessToken/RefreshAccessTokenCommandHandler
+    class: ../../../modules/Users/application/RefreshAccessToken/RefreshAccessTokenCommandHandler
     arguments: ['@User.RefreshAccessToken']
     tags:
       - { name: 'commandHandler' }

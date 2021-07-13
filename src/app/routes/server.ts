@@ -5,10 +5,10 @@ import express, { Request, Response } from "express";
 import Router from "express-promise-router";
 import helmet from "helmet";
 import * as http from "http";
-import container from './dependency-injection';
+import container from '../dependency-injection';
 import httpStatus from "http-status";
 import Logger from "../../modules/Shared/domain/Logger";
-import { registerRoutes } from "./routes";
+import { registerRoutes } from ".";
 
 export class Server {
   private express: express.Express;

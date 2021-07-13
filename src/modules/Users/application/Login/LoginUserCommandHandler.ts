@@ -1,9 +1,9 @@
 import { LoginUser } from "./LoginUser";
 import { LoginUserCommand } from "./LoginUserCommand";
+import LoginResponse from "./LoginResponse";
 import { UserEmail } from "../../domain/UserEmail";
 import { UserPassword } from "../../domain/UserPassword";
 import { CommandHandler } from "../../../Shared/domain/CommandHandler";
-import LoginResponse from "./LoginResponse";
 
 export class LoginUserCommandHandler implements CommandHandler<LoginUserCommand> {
   constructor(private loginUser: LoginUser) {}

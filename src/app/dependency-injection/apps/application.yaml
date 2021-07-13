@@ -1,0 +1,25 @@
+services:
+
+  User.controllers.UserPutController:
+    class: ../../User/controllers/UserPutController
+    arguments: ["@Shared.CommandBus"]
+
+  User.controllers.UserLogoutController:
+    class: ../../User/controllers/UserLogoutController
+    arguments: ["@Shared.CommandBus"]
+
+  User.controllers.UserLoginController:
+    class: ../../User/controllers/UserLoginController
+    arguments: ["@Shared.CommandBus"]
+
+  User.controllers.UserRefreshAccessTokenController:
+    class: ../../User/controllers/UserRefreshAccessTokenController
+    arguments: ["@Shared.CommandBus"]
+
+  User.controllers.StatusGetController:
+    class: ../../User/controllers/StatusGetController
+    arguments: []
+
+  Recipient.controllers.RecientPutController:
+    class: ../../Recipient/controllers/RecientPutController
+    arguments: ["@Shared.CommandBus"]

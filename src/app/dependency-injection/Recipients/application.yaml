@@ -1,0 +1,20 @@
+services:
+
+  Recipient.MongoConfig:
+    factory:
+      class: ../../../modules/Recipients/Shared/infrastructure/persistence/mongo/MongoConfigFactory
+      method: 'createConfig'
+
+  Recipient.RecipientRepository:
+    class: ../../../modules/Recipients/infrastructure/persistence/MongoRecipientRepository
+    arguments: ['@Shared.ConnectionManager']
+  
+  Recipient.RecipientCreator:
+    class: ../../../modules/Recipients/application/Create/RecipientCreator
+    arguments: ['@Recipient.RecipientRepository', '@Shared.EventBus']
+
+  Recipient.CreateRecipientCommandHandler:
+    class: ../../../modules/Recipients/application/Create/CreateRecipientCommandHandler
+    arguments: ['@Recipient.RecipientCreator']
+    tags:
+      - { name: 'commandHandler' }
