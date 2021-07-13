@@ -1,15 +1,20 @@
 import { UserName } from "./UserName";
 import { UserEmail } from "./UserEmail";
 import { UserPassword } from "./UserPassword";
+import { UserId } from "./userId";
+import { JWTToken, RefreshToken } from "./jwt";
+
 import { AggregateRoot } from "../../Shared/domain/AggregateRoot";
 import { UniqueEntityID } from "../../Shared/domain/UniqueEntityID";
-import { UserId } from "./userId";
 import { UserCreatedDomainEvent } from "./UserCreatedDomainEvent";
 
 type UserProps = {
   name: UserName;
   email: UserEmail;
   password: UserPassword;
+  accessToken?: JWTToken;
+  refreshToken?: RefreshToken;
+  isDeleted?: boolean;
 };
 
 export class User extends AggregateRoot<UserProps> {
@@ -27,6 +32,22 @@ export class User extends AggregateRoot<UserProps> {
 
   get password(): UserPassword {
     return this.props.password;
+  }
+
+  get accessToken (): string {
+    return this.props.accessToken;
+  }
+
+  get isDeleted (): boolean {
+    return this.props.isDeleted;
+  }
+
+  get refreshToken (): RefreshToken {
+    return this.props.refreshToken
+  }
+
+  public isLoggedIn (): boolean {
+    return !!this.props.accessToken && !!this.props.refreshToken
   }
 
   private constructor(userProps: UserProps, id?: UniqueEntityID) {

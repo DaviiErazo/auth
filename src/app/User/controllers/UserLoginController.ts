@@ -14,7 +14,8 @@ export class UserLoginController implements Controller {
     const createLoginUserCommand = new LoginUserCommand(email, password);
 
     try {
-      await this.commandBus.dispatch(createLoginUserCommand);
+      const accesssToken = await this.commandBus.dispatch(createLoginUserCommand);
+      res.status(httpStatus.CREATED).send({ accesssToken: accesssToken });
     } catch (error) {
       if (error instanceof UserNotFound) {
         res.status(httpStatus.BAD_REQUEST).send(error.message);
@@ -22,6 +23,5 @@ export class UserLoginController implements Controller {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json(error.message);
       }
     }
-    res.status(httpStatus.CREATED).send();
   }
 }

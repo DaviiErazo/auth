@@ -15,7 +15,37 @@ const userConfig = convict({
       default: "mongodb://localhost:27017/Bank",
     },
   },
+  redis: {
+    secret: {
+      doc: "The redis app secret",
+      format: String,
+      env: "BANK_REDIS_APP_SECRET",
+      default: "default",
+    },
+    tokenExpiryTime: {
+      doc: "Token expiry time",
+      format: Number,
+      default: 300,
+    },
+    redisServerPort: {
+      doc: "Redis server port",
+      format: String,
+      env: "BANK_REDIS_PORT",
+      default: 6379,
+    },
+    redisServerURL: {
+      doc: "Redis server url",
+      format: String,
+      env: "BANK_REDIS_URL",
+      default: "localhost",
+    },
+    redisConnectionString: {
+      doc: "Redis connection string",
+      format: String,
+      env: "BANK_REDIS_URL",
+      default: "default",
+    },
+  },
 });
-
 
 export default userConfig;

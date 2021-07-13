@@ -1,8 +1,28 @@
 services:
 
+  User.MongoConfig:
+    factory:
+      class: ../../../../modules/Users/Shared/infrastructure/persistence/mongo/MongoConfigFactory
+      method: 'createConfig'
+
+  User.RedisConfig:
+    factory:
+      class: ../../../../modules/Users/infrastructure/services/Redis/RedisConfig
+      method: 'createConfig'    
+
   User.UserRepository:
     class: ../../../../modules/Users/infrastructure/persistence/MongoUserRepository
     arguments: ['@Shared.ConnectionManager']
+  
+  User.RedisClient:
+    factory:
+      class: ../../../../modules/Users/infrastructure/services/Redis/RedisConnection
+      method: 'createClient'
+    arguments: ['@User.RedisConfig']
+
+  User.RedisAuthService:
+    class: ../../../../modules/Users/infrastructure/services/Redis/RedisAuthService
+    arguments: ['@User.RedisClient', '@User.RedisConfig']
 
   User.UserCreator:
     class: ../../../../modules/Users/application/Create/UserCreator
@@ -10,7 +30,7 @@ services:
 
   User.LoginUser:
     class: ../../../../modules/Users/application/Login/LoginUser
-    arguments: ['@User.UserRepository']
+    arguments: ['@User.UserRepository', '@User.RedisAuthService']
 
   User.CreateUserCommandHandler:
     class: ../../../../modules/Users/application/Create/CreateUserCommandHandler
