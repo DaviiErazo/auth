@@ -55,6 +55,12 @@ export class User extends AggregateRoot<UserProps> {
     return !!this.props.accessToken && !!this.props.refreshToken;
   }
 
+  public delete(): void {
+    if (!this.props.isDeleted) {
+      this.props.isDeleted = true;
+    }
+  }
+
   public setAccessToken(token: JWTToken, refreshToken: RefreshToken): void {
     this.props.accessToken = token;
     this.props.refreshToken = refreshToken;
@@ -98,6 +104,7 @@ export class User extends AggregateRoot<UserProps> {
       username: this.username.props.value,
       email: this.email.props.value,
       password: this.password.props.value,
+      isDeleted: this.isDeleted
     };
   }
 }

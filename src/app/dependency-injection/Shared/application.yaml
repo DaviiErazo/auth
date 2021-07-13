@@ -10,10 +10,6 @@ services:
     class: ../../../modules/Shared/infrastructure/WinstonLogger
     arguments: []
 
-  Shared.CommandHandlersInformation:
-    class: ../../../modules/Shared/infrastructure/CommandBus/CommandHandlersInformation
-    arguments: ['!tagged commandHandler']
-
   Shared.CommandBus:
     class: ../../../modules/Shared/infrastructure/CommandBus/InMemoryCommandBus
     arguments: ['@Shared.CommandHandlersInformation']
@@ -25,6 +21,10 @@ services:
   Shared.QueryHandlersInformation:
     class: ../../../modules/Shared/infrastructure/QueryBus/QueryHandlersInformation
     arguments: ['!tagged queryHandler']
+
+  Shared.CommandHandlersInformation:
+    class: ../../../modules/Shared/infrastructure/CommandBus/CommandHandlersInformation
+    arguments: ['!tagged commandHandler']
 
   Shared.QueryBus:
     class: ../../../modules/Shared/infrastructure/QueryBus/InMemoryQueryBus

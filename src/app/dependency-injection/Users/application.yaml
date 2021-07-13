@@ -40,6 +40,10 @@ services:
     class: ../../../modules/Users/application/RefreshAccessToken/RefreshAccessToken
     arguments: ['@User.UserRepository', '@User.RedisAuthService']
 
+  User.DeleteUser:
+    class: ../../../modules/Users/application/Delete/DeleteUser
+    arguments: ['@User.UserRepository', '@Shared.EventBus']
+
   User.CreateUserCommandHandler:
     class: ../../../modules/Users/application/Create/CreateUserCommandHandler
     arguments: ['@User.UserCreator']
@@ -61,5 +65,11 @@ services:
   User.RefreshAccessTokenCommandHandler:
     class: ../../../modules/Users/application/RefreshAccessToken/RefreshAccessTokenCommandHandler
     arguments: ['@User.RefreshAccessToken']
+    tags:
+      - { name: 'commandHandler' }
+
+  User.DeleteUserCommandHandler:
+    class: ../../../modules/Users/application/Delete/DeleteUserCommandHandler
+    arguments: ['@User.DeleteUser']
     tags:
       - { name: 'commandHandler' }

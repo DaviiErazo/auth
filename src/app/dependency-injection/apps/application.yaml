@@ -15,6 +15,10 @@ services:
   User.controllers.UserRefreshAccessTokenController:
     class: ../../User/controllers/UserRefreshAccessTokenController
     arguments: ["@Shared.CommandBus"]
+  
+  User.controllers.UserDeleteController:
+    class: ../../User/controllers/UserDeleteController
+    arguments: ["@Shared.CommandBus"]
 
   User.controllers.StatusGetController:
     class: ../../User/controllers/StatusGetController

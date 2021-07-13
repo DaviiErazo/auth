@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import { UserLoginController } from "../User/controllers/UserLoginController";
 import { UserLogoutController } from "../User/controllers/UserLogoutController";
 import { UserPutController } from "../User/controllers/UserPutController";
+import { UserDeleteController } from "../User/controllers/UserDeleteController";
 import { UserRefreshAccessTokenController } from "../User/controllers/UserRefreshAccessTokenController";
 import container from "../dependency-injection";
 
@@ -19,4 +20,7 @@ export const register = (router: Router) => {
     "User.controllers.UserRefreshAccessTokenController"
   );
   router.post("/user/refreshtoken", (req: Request, res: Response) => userRefreshAccessTokenController.run(req, res));
+
+  const userDeleteUserController: UserDeleteController = container.get("User.controllers.UserDeleteController");
+  router.post("/user/delete", (req: Request, res: Response) => userDeleteUserController.run(req, res));
 };
