@@ -23,3 +23,7 @@ services:
   Recipient.controllers.RecientPutController:
     class: ../../Recipient/controllers/RecientPutController
     arguments: ["@Shared.CommandBus"]
+
+  Recipient.controllers.RecipientGetController:
+    class: ../../Recipient/controllers/RecipientsGetController
+    arguments: ['@Shared.QueryBus']

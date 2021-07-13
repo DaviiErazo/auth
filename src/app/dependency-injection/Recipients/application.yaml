@@ -18,3 +18,13 @@ services:
     arguments: ['@Recipient.RecipientCreator']
     tags:
       - { name: 'commandHandler' }
+
+  Recipient.RecipientsByCriteriaSearcher:
+    class: ../../../modules/Recipients/application/SearchByCriteria/RecipientsByCriteriaSearcher
+    arguments: ['@Recipient.RecipientRepository']
+
+  Recipient.SearchRecipientsByCriteriaQueryHandler:
+    class: ../../../modules/Recipients/application/SearchByCriteria/SearchRecipientsByCriteriaQueryHandler
+    arguments: ['@Recipient.RecipientsByCriteriaSearcher']
+    tags:
+      - { name: 'queryHandler' }

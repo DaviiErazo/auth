@@ -21,3 +21,11 @@ services:
   Shared.EventBus:
     class: ../../../modules/Shared/infrastructure/EventBus/InMemory/InMemorySyncEventBus
     arguments: []
+
+  Shared.QueryHandlersInformation:
+    class: ../../../modules/Shared/infrastructure/QueryBus/QueryHandlersInformation
+    arguments: ['!tagged queryHandler']
+
+  Shared.QueryBus:
+    class: ../../../modules/Shared/infrastructure/QueryBus/InMemoryQueryBus
+    arguments: ['@Shared.QueryHandlersInformation']
