@@ -12,6 +12,10 @@ services:
     class: ../../controllers/UserLoginController
     arguments: ["@Shared.CommandBus"]
 
+  User.controllers.UserRefreshAccessTokenController:
+    class: ../../controllers/UserRefreshAccessTokenController
+    arguments: ["@Shared.CommandBus"]
+
   User.controllers.StatusGetController:
     class: ../../controllers/StatusGetController
     arguments: []

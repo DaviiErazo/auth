@@ -3,8 +3,9 @@ import { UserRepository } from "../../domain/UserRepository";
 import { UserEmail } from "../../domain/UserEmail";
 import { UserPassword } from "../../domain/UserPassword";
 import { AuthService } from "../../infrastructure/Services/Redis/AuthService";
-import { JWTToken } from "../../domain/jwt";
+import { JWTToken, RefreshToken } from "../../domain/jwt";
 import { PasswordDoesntMatchError } from "../../domain/PasswordDoesntMatchError";
+import LoginResponse from "./LoginResponse";
 
 type LoginUserProps = {
   email: UserEmail;
@@ -20,15 +21,13 @@ export class LoginUser {
     this.authService = authService;
   }
 
-  async run({ email, password }: LoginUserProps): Promise<string> {
+  async run({ email, password }: LoginUserProps): Promise<LoginResponse> {
     let user: User;
 
     user = await this.repository.getUserByEmail(email.props.value);
     const passwordValid = await user.password.comparePassword(password.props.value);
 
-    if (!passwordValid) {
-      throw new PasswordDoesntMatchError();
-    }
+    if (!passwordValid) throw new PasswordDoesntMatchError();
 
     const accessToken: JWTToken = this.authService.signJWT({
       username: user.username.props.value,
@@ -36,6 +35,17 @@ export class LoginUser {
       userId: user.userId.id.toString(),
     });
 
-    return accessToken;
+    const refreshToken: RefreshToken = this.authService.createRefreshToken();
+    
+    user.setAccessToken(accessToken, refreshToken);
+
+    await this.authService.saveAuthenticatedUser(user);
+
+    const response: LoginResponse = {
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+    };
+
+    return response;
   }
 }

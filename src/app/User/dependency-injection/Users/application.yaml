@@ -36,6 +36,10 @@ services:
     class: ../../../../modules/Users/application/Logout/LogoutUser
     arguments: ['@User.UserRepository', '@User.RedisAuthService']
 
+  User.RefreshAccessToken:
+    class: ../../../../modules/Users/application/RefreshAccessToken/RefreshAccessToken
+    arguments: ['@User.UserRepository', '@User.RedisAuthService']
+
   User.CreateUserCommandHandler:
     class: ../../../../modules/Users/application/Create/CreateUserCommandHandler
     arguments: ['@User.UserCreator']
@@ -51,5 +55,11 @@ services:
   User.LogoutUserCommandHandler:
     class: ../../../../modules/Users/application/Logout/LogoutUserCommandHandler
     arguments: ['@User.LogoutUser']
+    tags:
+      - { name: 'commandHandler' }
+
+  User.RefreshAccessTokenCommandHandler:
+    class: ../../../../modules/Users/application/RefreshAccessToken/RefreshAccessTokenCommandHandler
+    arguments: ['@User.RefreshAccessToken']
     tags:
       - { name: 'commandHandler' }

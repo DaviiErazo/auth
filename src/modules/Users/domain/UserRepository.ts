@@ -5,4 +5,5 @@ export interface UserRepository {
   exists(email: string, username: string): Promise<void>;
   getUserByEmail(email: string): Promise<User>;
   getUserById(id: string): Promise<User>;
+  getUserByUserName(username: string): Promise<User>;
 }

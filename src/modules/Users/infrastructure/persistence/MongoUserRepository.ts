@@ -19,18 +19,16 @@ export class MongoUserRepository extends MongoRepository implements UserReposito
     const user = await collection.findOne({
       $or: [{ email: email }, { username: username }],
     });
-    if (user) {
+
+    if (user) 
       throw new UserAlreadyExists(email, username);
-    }
   }
 
   public async getUserById(id: string): Promise<User> {
     const collection = await this.collection();
     const user = await collection.findOne({ _id: id });
 
-    if (!user) {
-      throw new UserNotFound(id);
-    }
+    if (!user) throw new UserNotFound(id);
 
     const userMapped = User.fromPrimitives(user);
     return userMapped;
@@ -40,7 +38,19 @@ export class MongoUserRepository extends MongoRepository implements UserReposito
     const collection = await this.collection();
     const user = await collection.findOne({ email: email });
 
-    if (!user) throw new UserNotFound(email);
+    if (!user) 
+      throw new UserNotFound(email);
+
+    const userMapped = User.fromPrimitives(user);
+    return userMapped;
+  }
+
+  public async getUserByUserName(username: string): Promise<User> {
+    const collection = await this.collection();
+    const user = await collection.findOne({ username: username });
+
+    if (!user) 
+      throw new UserNotFound(username);
 
     const userMapped = User.fromPrimitives(user);
     return userMapped;

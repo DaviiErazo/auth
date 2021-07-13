@@ -2,20 +2,19 @@ import { Request, Response } from "express";
 import httpStatus from "http-status";
 import { Controller } from "./Controller";
 import { CommandBus } from "../../../modules/Shared/domain/CommandBus";
-import { LoginUserCommand } from "../../../modules/Users/application/Login/LoginUserCommand";
+import { RefreshAccessTokenCommand } from "../../../modules/Users/application/RefreshAccessToken/RefreshAccessTokenCommand";
 import { UserNotFound } from "../../../modules/Users/domain/UserNotFound";
 
-export class UserLoginController implements Controller {
+export class UserRefreshAccessTokenController implements Controller {
   constructor(private commandBus: CommandBus) {}
 
   async run(req: Request, res: Response) {
-    const password: string = req.body.password;
-    const email: string = req.body.email;
-    const createLoginUserCommand = new LoginUserCommand(email, password);
+    const refreshToken: string = req.body.refreshToken;
+    const refreshAccessTokenCommand = new RefreshAccessTokenCommand(refreshToken);
 
     try {
-      const response = await this.commandBus.dispatch(createLoginUserCommand);
-      res.status(httpStatus.OK).send(response);
+      const response = await this.commandBus.dispatch(refreshAccessTokenCommand);
+      res.status(httpStatus.OK).send({"accessToken": response});
     } catch (error) {
       if (error instanceof UserNotFound) {
         res.status(httpStatus.BAD_REQUEST).send(error.message);

@@ -15,6 +15,7 @@ type UserProps = {
   accessToken?: JWTToken;
   refreshToken?: RefreshToken;
   isDeleted?: boolean;
+  lastLogin?: Date;
 };
 
 export class User extends AggregateRoot<UserProps> {
@@ -34,20 +35,30 @@ export class User extends AggregateRoot<UserProps> {
     return this.props.password;
   }
 
-  get accessToken (): string {
+  get accessToken(): string {
     return this.props.accessToken;
   }
 
-  get isDeleted (): boolean {
+  get isDeleted(): boolean {
     return this.props.isDeleted;
   }
 
-  get refreshToken (): RefreshToken {
-    return this.props.refreshToken
+  get refreshToken(): RefreshToken {
+    return this.props.refreshToken;
   }
 
-  public isLoggedIn (): boolean {
-    return !!this.props.accessToken && !!this.props.refreshToken
+  get lastLogin(): Date {
+    return this.props.lastLogin;
+  }
+
+  public isLoggedIn(): boolean {
+    return !!this.props.accessToken && !!this.props.refreshToken;
+  }
+
+  public setAccessToken(token: JWTToken, refreshToken: RefreshToken): void {
+    this.props.accessToken = token;
+    this.props.refreshToken = refreshToken;
+    this.props.lastLogin = new Date();
   }
 
   private constructor(userProps: UserProps, id?: UniqueEntityID) {
