@@ -9,7 +9,7 @@ import { UniqueEntityID } from "../../Shared/domain/UniqueEntityID";
 import { UserCreatedDomainEvent } from "./UserCreatedDomainEvent";
 
 type UserProps = {
-  name: UserName;
+  username: UserName;
   email: UserEmail;
   password: UserPassword;
   accessToken?: JWTToken;
@@ -22,8 +22,8 @@ export class User extends AggregateRoot<UserProps> {
     return UserId.create(this._id);
   }
 
-  get name(): UserName {
-    return this.props.name;
+  get username(): UserName {
+    return this.props.username;
   }
 
   get email(): UserEmail {
@@ -62,18 +62,18 @@ export class User extends AggregateRoot<UserProps> {
       user.record(
         new UserCreatedDomainEvent({
           id: user.id.toString(),
-          name: user.name.props.value,
-          email: user.name.props.value,
+          username: user.username.props.value,
+          email: user.username.props.value,
         })
       );
     }
     return user;
   }
 
-  static fromPrimitives(plainData: { id: string; name: string; email: string; password: string }): User {
+  static fromPrimitives(plainData: { id: string; username: string; email: string; password: string }): User {
     return User.create(
       {
-        name: UserName.create({ value: plainData.name }),
+        username: UserName.create({ value: plainData.username }),
         email: UserEmail.create({ value: plainData.email }),
         password: UserPassword.create({ value: plainData.password }),
       },
@@ -84,7 +84,7 @@ export class User extends AggregateRoot<UserProps> {
   toPrimitives() {
     return {
       id: this.id.toString(),
-      name: this.name.props.value,
+      username: this.username.props.value,
       email: this.email.props.value,
       password: this.password.props.value,
     };

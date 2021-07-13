@@ -31,7 +31,7 @@ export class LoginUser {
     }
 
     const accessToken: JWTToken = this.authService.signJWT({
-      username: user.name.props.value,
+      username: user.username.props.value,
       email: user.email.props.value,
       userId: user.userId.id.toString(),
     });

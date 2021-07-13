@@ -9,10 +9,10 @@ export class UserPutController implements Controller {
   constructor(private commandBus: CommandBus) {}
 
   async run(req: Request, res: Response) {
-    const name: string = req.body.name;
+    const username: string = req.body.username;
     const password: string = req.body.password;
     const email: string = req.body.email;
-    const createUserCommand = new CreateUserCommand({ name, password, email });
+    const createUserCommand = new CreateUserCommand({ username, password, email });
 
     try {
       await this.commandBus.dispatch(createUserCommand);

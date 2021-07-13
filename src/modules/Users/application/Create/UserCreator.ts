@@ -7,7 +7,7 @@ import { UserPassword } from "../../domain/UserPassword";
 import { EventBus } from "../../../Shared/domain/EventBus";
 
 type UserCreatorProps = {
-  name: UserName;
+  username: UserName;
   email: UserEmail;
   password: UserPassword;
 };
@@ -23,8 +23,10 @@ export class UserCreator {
 
   async run(props: UserCreatorProps): Promise<void> {
     let user: User;
+    const email = props.email.props.value;
+    const username = props.username.props.value
 
-    await this.repository.exists(props.email.props.value);
+    await this.repository.exists(email, username);
     user = User.create(props);
     
     await this.repository.save(user);

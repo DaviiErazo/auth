@@ -32,6 +32,10 @@ services:
     class: ../../../../modules/Users/application/Login/LoginUser
     arguments: ['@User.UserRepository', '@User.RedisAuthService']
 
+  User.LogoutUser:
+    class: ../../../../modules/Users/application/Logout/LogoutUser
+    arguments: ['@User.UserRepository', '@User.RedisAuthService']
+
   User.CreateUserCommandHandler:
     class: ../../../../modules/Users/application/Create/CreateUserCommandHandler
     arguments: ['@User.UserCreator']
@@ -41,5 +45,11 @@ services:
   User.LoginUserCommandHandler:
     class: ../../../../modules/Users/application/Login/LoginUserCommandHandler
     arguments: ['@User.LoginUser']
+    tags:
+      - { name: 'commandHandler' }
+
+  User.LogoutUserCommandHandler:
+    class: ../../../../modules/Users/application/Logout/LogoutUserCommandHandler
+    arguments: ['@User.LogoutUser']
     tags:
       - { name: 'commandHandler' }

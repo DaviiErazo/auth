@@ -44,7 +44,7 @@ export class RedisAuthService extends AbstractRedisClient implements AuthService
 
   public async saveAuthenticatedUser (user: User): Promise<void> {
     if (user.isLoggedIn()) {
-      await this.addToken(user.name.props.value, user.refreshToken, user.accessToken);
+      await this.addToken(user.username.props.value, user.refreshToken, user.accessToken);
     }
   }
 
