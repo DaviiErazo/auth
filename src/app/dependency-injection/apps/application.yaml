@@ -19,11 +19,3 @@ services:
   User.controllers.StatusGetController:
     class: ../../User/controllers/StatusGetController
     arguments: []
-
-  Recipient.controllers.RecientPutController:
-    class: ../../Recipient/controllers/RecientPutController
-    arguments: ["@Shared.CommandBus"]
-
-  Recipient.controllers.RecipientGetController:
-    class: ../../Recipient/controllers/RecipientsGetController
-    arguments: ['@Shared.QueryBus']
