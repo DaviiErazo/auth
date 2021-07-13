@@ -18,7 +18,7 @@ services:
     factory:
       class: ../../../modules/Users/infrastructure/services/Redis/RedisConnection
       method: 'createClient'
-    arguments: ['@User.RedisConfig']
+    arguments: ['@User.RedisConfig', '@Shared.Logger']
 
   User.RedisAuthService:
     class: ../../../modules/Users/infrastructure/services/Redis/RedisAuthService
