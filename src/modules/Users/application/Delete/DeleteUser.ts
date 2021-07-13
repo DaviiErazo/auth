@@ -17,6 +17,7 @@ export class DeleteUser {
     user = await this.repository.getUserById(id);
 
     user.delete();
+    
     await this.repository.save(user);
     await this.eventBus.publish(user.pullDomainEvents());
   }
