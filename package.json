@@ -9,7 +9,8 @@
   "scripts": {
     "test": "npm run test:unit",
     "dev:auth": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules  ./src/app/start.ts",
-    "test:unit": "NODE_ENV=test jest"
+    "test:unit": "NODE_ENV=test jest  --coverage"
+
   },
   "dependencies": {
     "@elastic/elasticsearch": "^7.11.0",

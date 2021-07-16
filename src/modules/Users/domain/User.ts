@@ -104,7 +104,10 @@ export class User extends AggregateRoot<UserProps> {
       username: this.username.props.value,
       email: this.email.props.value,
       password: this.password.props.value,
-      isDeleted: this.isDeleted
+      isDeleted: this.isDeleted,
+      accessToken: this.accessToken,
+      refreshToken: this.refreshToken,
+      lastLogin: this.lastLogin,
     };
   }
 }
