@@ -13,11 +13,10 @@ export class DeleteUser {
 
   async run(id: string): Promise<void> {
     let user: User;
-
     user = await this.repository.getUserById(id);
-
-    user.delete();
     
+    user.delete();
+
     await this.repository.save(user);
     await this.eventBus.publish(user.pullDomainEvents());
   }

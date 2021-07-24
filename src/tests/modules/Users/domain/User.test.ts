@@ -1,5 +1,5 @@
 import { User } from "../../../../modules/Users/domain/User";
-import { CreateUserCommandMother } from "../application/CreateUserCommandMother";
+import { CreateUserCommandMother } from "../application/Create/CreateUserCommandMother";
 import { UserEmailMother } from "./UserEmailMother";
 import { UserMother } from "./UserMother";
 import { UserNameMother } from "./UserNameMother";

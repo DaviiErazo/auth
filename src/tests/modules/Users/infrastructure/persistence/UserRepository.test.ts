@@ -54,7 +54,10 @@ describe("UserRepository", () => {
       // :TODO should to compare between instances, not by UserID
       // check way to create user objects
       // an user created by requests should be the same that an user created by BD
-      expect(expectedUser.id.toString()).toEqual(user.id.toString());
+      const expectedUserId = expectedUser.id.toString();
+      const userId = user.id.toString();
+
+      expect(expectedUserId).toEqual(userId);
     });
 
     it("should return an exist user by userId", async () => {
@@ -67,7 +70,10 @@ describe("UserRepository", () => {
       // :TODO should to compare between instances, not by UserID
       // check way to create user objects
       // an user created by requests should be the same that an user created by BD
-      expect(expectedUser.id.toString()).toEqual(user.id.toString());
+      const expectedUserId = expectedUser.id.toString();
+      const userId = user.id.toString();
+
+      expect(expectedUserId).toEqual(userId);
     });
 
     it("should return an exist user by username", async () => {
@@ -80,7 +86,10 @@ describe("UserRepository", () => {
       // :TODO should to compare between instances, not by UserID
       // check way to create user objects
       // an user created by requests should be the same that an user created by BD
-      expect(expectedUser.id.toString()).toEqual(user.id.toString());
+      const expectedUserId = expectedUser.id.toString();
+      const userId = user.id.toString();
+
+      expect(expectedUserId).toEqual(userId);
     });
   });
 });

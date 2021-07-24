@@ -9,5 +9,4 @@ export class UserEmailMother {
   static random(): UserEmail {
     return this.create(EmailMother.random());
   }
-
 }

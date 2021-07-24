@@ -87,12 +87,19 @@ export class User extends AggregateRoot<UserProps> {
     return user;
   }
 
-  static fromPrimitives(plainData: { id: string; username: string; email: string; password: string }): User {
+  static fromPrimitives(plainData: {
+    id: string;
+    username: string;
+    email: string;
+    password: string;
+    isDeleted: boolean;
+  }): User {
     return User.create(
       {
         username: UserName.create({ value: plainData.username }),
         email: UserEmail.create({ value: plainData.email }),
         password: UserPassword.create({ value: plainData.password }),
+        isDeleted: plainData.isDeleted,
       },
       new UniqueEntityID(plainData.id)
     );
