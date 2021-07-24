@@ -4,6 +4,7 @@ import { DeleteUserCommandHandler } from "../../../../../modules/Users/applicati
 import { DeleteUser } from "../../../../../modules/Users/application/Delete/DeleteUser";
 import { DeleteUserCommandMother } from "./DeleteUserCommandMother";
 import { UserMother } from "../../domain/UserMother";
+import { UserNotFound } from "../../../../../modules/Users/domain/UserNotFound";
 
 let repository: UserRepositoryMock;
 let handler: DeleteUserCommandHandler;
@@ -21,8 +22,25 @@ describe("UserDelete", () => {
     const deleteUseCase = new DeleteUser(repository, eventBus);
     handler = new DeleteUserCommandHandler(deleteUseCase);
 
-    //const user = await repository.getUserById(existingUser.id.toString());
     const command = DeleteUserCommandMother.create(existingUser.id.toString());
     await handler.handle(command);
+  });
+
+  it("throws an error if you handle a delete command of a user that doesn't exist", async () => {
+    let exception;
+    const deleteUseCase = new DeleteUser(repository, eventBus);
+    handler = new DeleteUserCommandHandler(deleteUseCase);
+
+    const command = DeleteUserCommandMother.create("RandomID");
+
+
+    try {
+      await handler.handle(command);
+    } catch (error) {
+      exception = error;
+    }
+
+    expect(exception).toBeInstanceOf(UserNotFound);
+    expect(exception.message).toBe(`User RandomID not found`);
   });
 });
