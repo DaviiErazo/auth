@@ -33,7 +33,6 @@ describe("UserDelete", () => {
 
     const command = DeleteUserCommandMother.create("RandomID");
 
-
     try {
       await handler.handle(command);
     } catch (error) {
