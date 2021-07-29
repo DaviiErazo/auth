@@ -7,14 +7,6 @@ import { AuthService } from "./AuthService";
 import { RefreshToken, JWTToken, JWTClaims } from "../../../domain/jwt";
 import { User } from "../../../domain/user";
 
-/**
- * @class JWTClient
- * @extends AbstractRedisClient
- * @desc This class is responsible for persisting jwts to redis
- * and for signing tokens. It should also be responsible for determining their
- * validity.
- */
-
 export class RedisAuthService extends AbstractRedisClient implements AuthService {
   public jwtHashName: string = "activeJwtClients";
   readonly redisConfig: IRedisConfig;
@@ -54,12 +46,6 @@ export class RedisAuthService extends AbstractRedisClient implements AuthService
     return randtoken.uid(256) as RefreshToken;
   }
 
-  /**
-   * @function signJWT
-   * @desc Signs the JWT token using the server secret with some claims
-   * about the current user.
-   */
-
   public signJWT(props: JWTClaims): JWTToken {
     const claims: JWTClaims = {
       email: props.email,
@@ -71,14 +57,6 @@ export class RedisAuthService extends AbstractRedisClient implements AuthService
       expiresIn: this.redisConfig.tokenExpiryTime,
     });
   }
-
-  /**
-   * @method decodeJWT
-   * @desc Decodes the JWT using the server secret. If successful decode,
-   * it returns the data from the token.
-   * @param {token} string
-   * @return Promise<any>
-   */
 
   public decodeJWT(token: string): Promise<JWTClaims> {
     return new Promise((resolve, reject) => {
@@ -93,107 +71,41 @@ export class RedisAuthService extends AbstractRedisClient implements AuthService
     return `refresh-${refreshToken}.${this.jwtHashName}.${username}`;
   }
 
-  /**
-   * @method addToken
-   * @desc Adds the token for this user to redis.
-   *
-   * @param {username} string
-   * @param {refreshToken} string
-   * @param {token} string
-   * @return Promise<any>
-   */
-
   public addToken(username: string, refreshToken: RefreshToken, token: JWTToken): Promise<any> {
     return this.set(this.constructKey(username, refreshToken), token);
   }
-
-  /**
-   * @method clearAllTokens
-   * @desc Clears all jwt tokens from redis. Usually useful for testing.
-   * @return Promise<any>
-   */
 
   public async clearAllTokens(): Promise<any> {
     const allKeys = await this.getAllKeys(`*${this.jwtHashName}*`);
     return Promise.all(allKeys.map((key) => this.deleteOne(key)));
   }
 
-  /**
-   * @method countSessions
-   * @desc Counts the total number of sessions for a particular user.
-   * @param {username} string
-   * @return Promise<number>
-   */
-
   public countSessions(username: string): Promise<number> {
     return this.count(`*${this.jwtHashName}.${username}`);
   }
 
-  /**
-   * @method countTokens
-   * @desc Counts the total number of sessions for a particular user.
-   * @return Promise<number>
-   */
-
   public countTokens(): Promise<number> {
     return this.count(`*${this.jwtHashName}*`);
   }
-
-  /**
-   * @method getTokens
-   * @desc Gets the user's tokens that are currently active.
-   * @return Promise<string[]>
-   */
 
   public async getTokens(username: string): Promise<string[]> {
     const keyValues = await this.getAllKeyValue(`*${this.jwtHashName}.${username}`);
     return keyValues.map((kv) => kv.value);
   }
 
-  /**
-   * @method getToken
-   * @desc Gets a single token for the user.
-   * @param {username} string
-   * @param {refreshToken} string
-   * @return Promise<string>
-   */
-
   public async getToken(username: string, refreshToken: string): Promise<string> {
     return this.getOne(this.constructKey(username, refreshToken));
   }
 
-  /**
-   * @method clearToken
-   * @desc Deletes a single user's session token.
-   * @param {username} string
-   * @param {refreshToken} string
-   * @return Promise<string>
-   */
-
   public async clearToken(username: string, refreshToken: string): Promise<any> {
     return this.deleteOne(this.constructKey(username, refreshToken));
   }
-
-  /**
-   * @method clearAllSessions
-   * @desc Clears all active sessions for the current user.
-   * @param {username} string
-   * @return Promise<any>
-   */
 
   public async clearAllSessions(username: string): Promise<any> {
     const keyValues = await this.getAllKeyValue(`*${this.jwtHashName}.${username}`);
     const keys = keyValues.map((kv) => kv.key);
     return Promise.all(keys.map((key) => this.deleteOne(key)));
   }
-
-  /**
-   * @method sessionExists
-   * @desc Checks if the session for this user exists
-   * @param {username} string
-   * @param {refreshToken} string
-   * @return Promise<boolean>
-   */
 
   public async sessionExists(username: string, refreshToken: string): Promise<boolean> {
     const token = await this.getToken(username, refreshToken);

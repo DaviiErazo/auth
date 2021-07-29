@@ -1,6 +1,5 @@
 import { UserRepository } from "../../../../modules/Users/domain/UserRepository";
 import { User } from "../../../../modules/Users/domain/User";
-import { UserId } from "../../../../modules/Users/Shared/domain/UserId";
 import { UserAlreadyExists } from "../../../../modules/Users/domain/UserAlreadyExists";
 import { UserNotFound } from "../../../../modules/Users/domain/UserNotFound";
 
