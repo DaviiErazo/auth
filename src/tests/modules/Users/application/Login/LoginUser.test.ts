@@ -1,15 +1,15 @@
 var redis = require("redis-mock");
 
-import { UserRepositoryMock } from "../../__mocks__/UserRepositoryMock";
 import { UserMother } from "../../domain/UserMother";
-import { UserNotFound } from "../../../../../modules/Users/domain/UserNotFound";
+import { PasswordMother } from "../../../Shared/domain/PasswordMother";
 import { LoginUsercommandMother } from "./LoginUserCommandMother";
 import { LoginUser } from "../../../../../modules/Users/application/Login/LoginUser";
 import { LoginUserCommandHandler } from "../../../../../modules/Users/application/Login/LoginUserCommandHandler";
+import { UserRepositoryMock } from "../../__mocks__/UserRepositoryMock";
 import { RedisConfig } from "../../../../../modules/Users/infrastructure/services/Redis/RedisConfig";
 import { RedisAuthService } from "../../../../../modules/Users/infrastructure/services/Redis/RedisAuthService";
-import { PasswordMother } from "../../../Shared/domain/PasswordMother";
 import { PasswordDoesntMatchError } from "../../../../../modules/Users/domain/PasswordDoesntMatchError";
+import { UserNotFound } from "../../../../../modules/Users/domain/UserNotFound";
 
 let repository: UserRepositoryMock;
 let handler: LoginUserCommandHandler;
