@@ -27,5 +27,8 @@ describe("User", () => {
 
     expect(events).toHaveLength(1);
     expect(events[0].eventName).toBe("user.created");
+    expect(user.equals(user)).toBe(true);
+    expect(user.equals()).toBe(false);
+
   });
 });

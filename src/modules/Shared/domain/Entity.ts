@@ -24,10 +24,6 @@ export abstract class Entity<T> {
       return true;
     }
 
-    if (!isEntity(object)) {
-      return false;
-    }
-
     return this._id.equals(object._id);
   }
 }
