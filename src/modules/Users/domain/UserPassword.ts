@@ -70,8 +70,8 @@ export class UserPassword extends ValueObject<UserPasswordProps> {
   }
 
   public static create(props: UserPasswordProps): UserPassword {
-    this.isAppropriateLength(props.value);
     this.againstNullOrUndefined(props.value);
+    this.isAppropriateLength(props.value);
     return new UserPassword(props);
   }
 }
