@@ -18,12 +18,17 @@ beforeEach(() => {
 describe("UserDelete", () => {
   it("should delete a existing user", async () => {
     const existingUser = UserMother.random();
+
     await repository.save(existingUser);
+
     const deleteUseCase = new DeleteUser(repository, eventBus);
     handler = new DeleteUserCommandHandler(deleteUseCase);
 
     const command = DeleteUserCommandMother.create(existingUser.id.toString());
     await handler.handle(command);
+
+    const deleteUser = await repository.getUserById(existingUser.id.toString());
+    expect(deleteUser.isDeleted).toBe(true);
   });
 
   it("throws an error if a delete command is handled for a user that does not exist", async () => {
