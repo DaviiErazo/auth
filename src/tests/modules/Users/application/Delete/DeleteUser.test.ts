@@ -26,7 +26,7 @@ describe("UserDelete", () => {
     await handler.handle(command);
   });
 
-  it("throws an error if you handle a delete command of a user that doesn't exist", async () => {
+  it("throws an error if a delete command is handled for a user that does not exist", async () => {
     let exception;
     const deleteUseCase = new DeleteUser(repository, eventBus);
     handler = new DeleteUserCommandHandler(deleteUseCase);
