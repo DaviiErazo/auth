@@ -43,7 +43,7 @@ describe("UserLogin", () => {
     expect(typeof response.refreshToken).toBe("string");
   });
 
-  it("throws an error if you handle a login command of a user that doesn't exist", async () => {
+  it("throws an error if a user login command that does not exist is handled", async () => {
     let exception;
     const existingUser = UserMother.random();
 
@@ -65,7 +65,7 @@ describe("UserLogin", () => {
     expect(exception.message).toBe(`User ${email} not found`);
   });
 
-  it("throws an error if you handle a login command of a user that passoword doesn't match", async () => {
+  it("throws an error if a user login command is handled that the password does not match", async () => {
     let exception;
     const existingUser = UserMother.random();
 
