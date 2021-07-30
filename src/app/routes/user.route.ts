@@ -5,6 +5,7 @@ import { UserPutController } from "../User/controllers/UserPutController";
 import { UserDeleteController } from "../User/controllers/UserDeleteController";
 import { UserRefreshAccessTokenController } from "../User/controllers/UserRefreshAccessTokenController";
 import container from "../dependency-injection";
+import { UsersGetController } from "../User/controllers/UsersGetController";
 
 export const register = (router: Router) => {
   const userPutController: UserPutController = container.get("User.controllers.UserPutController");
@@ -23,4 +24,7 @@ export const register = (router: Router) => {
 
   const userDeleteUserController: UserDeleteController = container.get("User.controllers.UserDeleteController");
   router.post("/user/delete", (req: Request, res: Response) => userDeleteUserController.run(req, res));
+
+  const userGetUsersController: UsersGetController = container.get("User.controllers.UsersGetController");
+  router.get("/users", (req: Request, res: Response) => userGetUsersController.run(req, res));
 };

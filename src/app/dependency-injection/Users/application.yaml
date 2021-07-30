@@ -44,6 +44,16 @@ services:
     class: ../../../modules/Users/application/Delete/DeleteUser
     arguments: ['@User.UserRepository', '@Shared.EventBus']
 
+  User.UsersByCriteriaSearcher:
+    class: ../../../modules/Users/application/SearchByCriteria/UsersByCriteriaSearcher
+    arguments: ['@User.UserRepository']
+
+  User.SearchUsersByCriteriaQueryHandler:
+    class: ../../../modules/Users/application/SearchByCriteria/SearchUsersByCriteriaQueryHandler
+    arguments: ['@User.UsersByCriteriaSearcher']
+    tags:
+      - { name: 'queryHandler' }
+
   User.CreateUserCommandHandler:
     class: ../../../modules/Users/application/Create/CreateUserCommandHandler
     arguments: ['@User.UserCreator']

@@ -20,6 +20,10 @@ services:
     class: ../../User/controllers/UserDeleteController
     arguments: ["@Shared.CommandBus"]
 
+  User.controllers.UsersGetController:
+    class: ../../User/controllers/UsersGetController
+    arguments: ["@Shared.QueryBus"]
+
   User.controllers.StatusGetController:
     class: ../../User/controllers/StatusGetController
     arguments: []
