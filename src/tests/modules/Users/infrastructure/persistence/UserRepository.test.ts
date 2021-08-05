@@ -1,18 +1,16 @@
-import container from "../../../../../app/dependency-injection";
 import { UserAlreadyExists } from "../../../../../modules/Users/domain/UserAlreadyExists";
 import { UserRepository } from "../../../../../modules/Users/domain/UserRepository";
-import { EnvironmentArranger } from "../../../Shared/infrastructure/arranger/EnvironmentArranger";
 import { UserMother } from "../../domain/UserMother";
+import { UserRepositoryMock } from "../../__mocks__/UserRepositoryMock";
 
-const repository: UserRepository = container.get("User.UserRepository");
-const environmentArranger: Promise<EnvironmentArranger> = container.get("User.EnvironmentArranger");
+let repository: UserRepository;
 
 beforeEach(async () => {
-  await (await environmentArranger).arrange();
+  repository = new UserRepositoryMock();
 });
 
 afterAll(async () => {
-  await (await environmentArranger).arrange();
+  repository = new UserRepositoryMock();
 });
 
 describe("UserRepository", () => {
