@@ -28,15 +28,13 @@ describe("UserPassword", () => {
     }
 
     expect(exception).toBeInstanceOf(InvalidArgumentError);
-    expect(exception.message).toBe(`The password ${invalidPassword} is null or undefined.`);
+    expect(exception.message).toBe(`The password <${invalidPassword}> is invalid.`);
   });
 
   it("should return false when compare a hashed password with unhashed", async () => {
     let compare;
     const randomPassword = UserPasswordMother.random().props.value;
     const userPassword = UserPassword.create({ value: randomPassword, hashed: true });
-    //const passwordHashed = await userPassword.getHashedValue();
-    //const userPasswordHashed = UserPassword.create({ value: passwordHashed, hashed: true });
     compare = await userPassword.comparePassword(randomPassword);
 
     expect(compare).toBe(false);

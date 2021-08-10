@@ -20,8 +20,8 @@ export abstract class ValueObject<T extends ValueObjectProps> {
     this.props = baseProps;
   }
 
-  public static againstNullOrUndefined(name: string, value: string): void {
-    if (value === null || value === undefined) {
+  public static againstNullOrUndefined(name: string, value: any): void {
+    if (value === null || value === undefined || value.length < 1) {
       throw new InvalidArgumentError(`The ${name} <${value}> is invalid.`);
     }
   }
