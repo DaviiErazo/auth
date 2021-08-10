@@ -29,11 +29,13 @@ export class InMemorySyncEventBus implements EventBus {
         return subscribers.map((subscriber) => executions.push(subscriber.boundedCallback(event)));
       }
     });
-
     await Promise.all(executions);
   }
 
   addSubscribers(subscribers: Array<DomainEventSubscriber<DomainEvent>>) {
+    console.log("********************************************");
+    console.log(subscribers.map(sub => console.log(sub)));
+    console.log("********************************************");
     subscribers.map((subscriber) =>
       subscriber.subscribedTo().map((event) => this.subscribe(event.EVENT_NAME!, subscriber))
     );

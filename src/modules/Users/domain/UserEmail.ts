@@ -23,6 +23,7 @@ export class UserEmail extends ValueObject<UserEmailProps> {
   }
 
   public static create(props: UserEmailProps) {
+    this.againstNullOrUndefined('Email', props.value)
     this.ensureEmailIsValid(props.value);
     return new UserEmail(props);
   }

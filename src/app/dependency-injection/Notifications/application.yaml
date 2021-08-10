@@ -1,0 +1,14 @@
+services:
+  Notifications.EmailSender:
+    class: ../../../modules/Notifications/infrastructure/EmailSenderServices
+    arguments: ['http://localhost:3000']
+  
+  Notifications.SendWelcomeUserEmail:
+    class: ../../../modules/Notifications/application/SendWelcomeUserEmail/SendWelcomeUserEmail
+    arguments: ["@Notifications.EmailSender"]
+
+  Notifications.SendWelcomeUserEmailOnUserRegistered:
+    class: ../../../modules/Notifications/application/SendWelcomeUserEmail/SendWelcomeUserEmailOnUserRegistered
+    arguments: ["@Notifications.SendWelcomeUserEmail"]
+    tags:
+      - { name: 'domainEventSubscriber' }

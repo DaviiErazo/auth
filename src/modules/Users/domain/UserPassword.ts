@@ -20,12 +20,6 @@ export class UserPassword extends ValueObject<UserPasswordProps> {
     }
   }
 
-  private static againstNullOrUndefined(password: string): void {
-    if (password === null || password === undefined) {
-      throw new InvalidArgumentError(`The password ${password} is null or undefined.`);
-    }
-  }
-
   public async comparePassword(plainTextPassword: string): Promise<boolean> {
     let hashed: string;
     if (this.isAlreadyHashed()) {
@@ -70,7 +64,7 @@ export class UserPassword extends ValueObject<UserPasswordProps> {
   }
 
   public static create(props: UserPasswordProps): UserPassword {
-    this.againstNullOrUndefined(props.value);
+    this.againstNullOrUndefined('password', props.value);
     this.isAppropriateLength(props.value);
     return new UserPassword(props);
   }

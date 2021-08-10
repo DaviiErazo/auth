@@ -16,7 +16,7 @@ services:
 
   Shared.EventBus:
     class: ../../../modules/Shared/infrastructure/EventBus/InMemory/InMemorySyncEventBus
-    arguments: []
+    arguments: ['@Shared.Logger']
 
   Shared.QueryHandlersInformation:
     class: ../../../modules/Shared/infrastructure/QueryBus/QueryHandlersInformation

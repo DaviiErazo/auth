@@ -1,3 +1,4 @@
+import { InvalidArgumentError } from "./InvalidArgumentError";
 
 interface ValueObjectProps {
   [index: string]: any;
@@ -11,15 +12,21 @@ interface ValueObjectProps {
 export abstract class ValueObject<T extends ValueObjectProps> {
   public props: T;
 
-  constructor (props: T) {
+  constructor(props: T) {
     let baseProps: any = {
-      ...props, 
+      ...props,
     }
 
     this.props = baseProps;
   }
 
-  public equals (vo?: ValueObject<T>) : boolean {
+  public static againstNullOrUndefined(name: string, value: string): void {
+    if (value === null || value === undefined) {
+      throw new InvalidArgumentError(`The ${name} <${value}> is invalid.`);
+    }
+  }
+
+  public equals(vo?: ValueObject<T>): boolean {
     if (vo === null || vo === undefined) {
       return false;
     }

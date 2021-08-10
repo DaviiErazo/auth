@@ -6,7 +6,7 @@ import { JWTToken, RefreshToken } from "./jwt";
 
 import { AggregateRoot } from "../../Shared/domain/AggregateRoot";
 import { UniqueEntityID } from "../../Shared/domain/UniqueEntityID";
-import { UserCreatedDomainEvent } from "./UserCreatedDomainEvent";
+import { UserCreatedDomainEvent } from "../../Notifications/domain/UserCreatedDomainEvent";
 
 type UserProps = {
   username: UserName;
@@ -79,8 +79,7 @@ export class User extends AggregateRoot<UserProps> {
       user.record(
         new UserCreatedDomainEvent({
           id: user.id.toString(),
-          username: user.username.props.value,
-          email: user.username.props.value,
+          userEmailAddress: user.email.props.value,
         })
       );
     }

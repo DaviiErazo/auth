@@ -1,5 +1,6 @@
 imports:
   - { resource: ./apps/application.yaml }
   - { resource: ./Users/application.yaml }
+  - { resource: ./Notifications/application.yaml }
   - { resource: ./Shared/application.yaml }
-  
+

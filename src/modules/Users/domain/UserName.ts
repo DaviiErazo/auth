@@ -16,6 +16,7 @@ export class UserName extends ValueObject<UserNameProps> {
   }
 
   public static create(props: UserNameProps) {
+    this.againstNullOrUndefined('username', props.value);
     this.ensureLengthIsLessThan30Characters(props.value);
     return new UserName(props);
   }
